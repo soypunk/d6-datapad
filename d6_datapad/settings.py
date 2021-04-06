@@ -27,7 +27,7 @@ SECRET_KEY = 'rainbow-unicrons-$jbcf_(=2bw=7)21@9(=e(o&3o$18nr)x=e9h82*nud6)k=vp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['d6-datapad.medero.net','127.0.0.1']
 
 
 # Application definition
