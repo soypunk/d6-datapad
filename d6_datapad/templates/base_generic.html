@@ -5,18 +5,46 @@
 		<meta charset="utf-8">
 		{% block title %}<title>D6 Datapad</title>{% endblock %}
 		<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+		<style>
+		body {
+			-webkit-text-size-adjust: none;
+		}
+		/* FLEXBOX */
+		.fb-100 {
+			flex-basis: 100%
+		}
+
+		.fg-1 {
+			flex-grow: 1;
+		}
+		/*
+		@media (prefers-color-scheme: dark) {
+		  .bg-near-black { background-color: #eeeeee; }
+		  .bg-near-white { background-color: #111111; }
+		  .black { color: #ffffff; }
+		  .dark-gray { color: #CCCCCC; }
+		}
+		*/
+		</style>
 		{% block extra_head %}
-		{% endblock %}			
+		{% endblock %}		
 	</head>
-	<body class="ma0 pa0 sans-serif">
-		{% block nav %}
-		{% endblock %}
-		{% if messages %}
-		{% endif %}
+	<body class="bg-near-white dark-gray ma0 pa0 sans-serif">
 		{% block header %}
-		<header>
+		{% include 'partials/messages.html' with messages=messages %}		
+		<header class="relative bg-light-gray shadow-4 z-6 pa3 mb3 flex items-center justify-between self-center center">
+			<h1 class="lh-solid f5 mv0"><a href="/" rel="home" class="link dark-gray hover-blue ttu tracked">D6 Datapad</a></h1>
+			{% block nav %}
+			<nav class="ma0 pa0 f6 ttu tracked">
+				{% if user.is_authenticated %}
+				<a href="{% url 'logout' %}" class="link dib hover-blue">Logout</a>
+				{% else %}
+				<a href="{% url 'login' %}" class="link dib hover-blue">Login</a>
+				{% endif %}
+			</nav>			
+			{% endblock %}
 			{% block header_content %}
-			{% endblock %}	
+			{% endblock %}
 		</header>
 		{% endblock %}
 		{% block body %}
@@ -26,10 +54,10 @@
 		</main>
 		{% endblock %}
 		{% block footer %}
-		<footer>
+		<footer class="pa3">
 			{% block footer_content %}
 			{% endblock %}		
-			<p>© {% now "Y" %}</p>
+			<p class="lh-copy">© {% now "Y" %}</p>
 		</footer>	
 		{% endblock %}
 	</body>

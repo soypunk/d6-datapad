@@ -1,0 +1,15 @@
+{% if messages %}
+	<div class="">
+		{% for message in messages %}
+		<div class="dt w-100 ba br2 pa3 mb2 {% if message.tags %}{{ message.tags }}{% endif %}">
+			<svg class="dtc w1" data-icon="info" viewBox="0 0 32 32" style="fill:currentcolor">
+				<title>info icon</title>
+				<path d="M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3 3 0 0 0 16 6"></path>
+			</svg>
+			<span class="dtc lh-title" role="alert">			
+				{{ message }}
+			</span>			
+		</div>
+		{% endfor %}
+	</div>		
+{% endif %}

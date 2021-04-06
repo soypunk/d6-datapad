@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-
 import dj_database_url
+
+from django.contrib.messages import constants as messages
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -149,3 +151,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Email
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+# Django Messages Customization
+# https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-MESSAGE_TAGS
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'dark-gray bg-light-gray',
+    messages.INFO: 'dark-blue bg-washed-blue',
+    messages.SUCCESS: 'dark-green bg-washed-green',
+    messages.WARNING: 'dark-gold bg-washed-yellow',
+    messages.ERROR: 'dark-red bg-washed-red',
+}
