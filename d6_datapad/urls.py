@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from d6_datapad.core.views import Home
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', Home.as_view(), name='home'),    
 ]

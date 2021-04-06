@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		{% block title %}<title>KELP Assessment</title>{% endblock %}
+		<meta name="viewport" content="width=device-width, initial-scale=1">	
+		<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+		{% block extra_head %}
+		{% endblock %}
+	</head>
+	<body class="bg-nearwhite ma0 pa0">
+		{% block header %}{% endblock %}
+		{% block body %}
+		
+		<main role="main" class="">
+			{% block content %}
+			{% endblock %}
+		</main>
+		{% endblock %}
+		{% block footer %}
+		{% block extra_body %}
+		{% endblock %}
+	</body>
+</html>

@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		{% block title %}<title>D6 Datapad</title>{% endblock %}
+		<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+		{% block extra_head %}
+		{% endblock %}			
+	</head>
+	<body class="ma0 pa0 sans-serif">
+		{% block nav %}
+		{% endblock %}
+		{% if messages %}
+		{% endif %}
+		{% block header %}
+		<header>
+			{% block header_content %}
+			{% endblock %}	
+		</header>
+		{% endblock %}
+		{% block body %}
+		<main role="main">
+			{% block content %}
+			{% endblock %}
+		</main>
+		{% endblock %}
+		{% block footer %}
+		<footer>
+			{% block footer_content %}
+			{% endblock %}		
+			<p>© {% now "Y" %}</p>
+		</footer>	
+		{% endblock %}
+	</body>
+</html>

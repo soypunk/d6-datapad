@@ -41,8 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+LOCAL_APPS = [
+    'd6_datapad.core',
+]
+
 if DEBUG:
     INSTALLED_APPS += ['whitenoise.runserver_nostatic']
+
+INSTALLED_APPS += LOCAL_APPS
 
 
 MIDDLEWARE = [
@@ -61,7 +67,7 @@ ROOT_URLCONF = 'd6_datapad.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'd6_datapad', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
