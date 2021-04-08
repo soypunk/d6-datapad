@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Game{% endblock %}
+
+{% block content %}
+  <section class="mw5 mw7-ns center pa3 ph5-ns">
+    <div class="pa3 bg-white ba b--moon-gray">
+      <h2 class="mt0">Create Game</h2>
+      {% include 'games/partials/game_create_form.html' %}
+    </div>
+  </section>
+{% endblock %}

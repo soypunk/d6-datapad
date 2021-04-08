@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['d6-datapad.medero.net','127.0.0.1','localhost','0.0.0.0']
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,14 +43,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-LOCAL_APPS = [
-    'd6_datapad.core',
+THIRD_PARTY_APPS = [
+    'widget_tweaks',
 ]
 
 if DEBUG:
-    INSTALLED_APPS += ['whitenoise.runserver_nostatic']
+    THIRD_PARTY_APPS += ['whitenoise.runserver_nostatic']
 
-INSTALLED_APPS += LOCAL_APPS
+LOCAL_APPS = [
+    'd6_datapad.core',
+    'd6_datapad.games',
+    'd6_datapad.characters',    
+]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 
 MIDDLEWARE = [

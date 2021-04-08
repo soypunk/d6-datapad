@@ -12,6 +12,8 @@ cffi==1.14.5
     # via argon2-cffi
 dj-database-url==0.5.0
     # via -r requirements.in
+django-braces==1.14.0
+    # via -r requirements.in
 django-model-utils==4.1.1
     # via -r requirements.in
 django-widget-tweaks==1.4.8
@@ -19,6 +21,7 @@ django-widget-tweaks==1.4.8
 django[argon2]==3.2
     # via
     #   -r requirements.in
+    #   django-braces
     #   django-model-utils
 gunicorn==20.1.0
     # via -r requirements.in
@@ -31,7 +34,9 @@ python-slugify==4.0.1
 pytz==2021.1
     # via django
 six==1.15.0
-    # via argon2-cffi
+    # via
+    #   argon2-cffi
+    #   django-braces
 sqlparse==0.4.1
     # via django
 text-unidecode==1.3

@@ -20,6 +20,12 @@ from d6_datapad.core.views import Home
 
 urlpatterns = [
     path('', Home.as_view(), name='home'),
+    
+    #accounts
     path('accounts/', include('django.contrib.auth.urls')),
+    
+    #game
+    path('g/', include('d6_datapad.games.urls')),
+    
     path('admin/', admin.site.urls),
 ]

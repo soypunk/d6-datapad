@@ -1,0 +1,107 @@
+{% extends "base_generic.html" %}
+
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
+<srcipt src="https://unpkg.com/whatwg-fetch@latest/dist/fetch.umd.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<h2 class="lh-title">Games List</h2>
+
+<ul>
+{% for game in object_list %}
+    <li><a class="link blue underline" href="{{ game.get_absolute_url }}">{{ game.name }}</a></li>
+{% empty %}
+    <li>No games yet.</li>
+{% endfor %}
+</ul>
+
+<div class="">
+	<button id="add-button" class="button-reset dib pv2 ph3 ba br3 bg-blue white hover-bg-dark-blue pointer">Add Game</button>
+</div>
+
+{% endblock %}
+
+{% block extra_body_content %}
+<div id="modal-1" class="modal micromodal-slide" aria-hidden="true">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title" >
+      <header class="modal__header">
+        <h2 id="modal-1-title" class="modal__title">
+          Create Game
+        </h2>
+        <button class="modal__close pointer" aria-label="Close modal" data-micromodal-close></button>
+      </header>
+      <div id="modal-1-content" class="modal__content">
+        Modal Content
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer_scripts %}
+<script>
+ready(function() {
+
+	function populateModalContent(id, html) {
+		let $modalContentEl = document.getElementById(id+'-content');
+		$modalContentEl.innerHTML = html;
+		return $modalContentEl;
+	}
+	
+	function addFormListeners($formContainerEl) {
+		let forms = $formContainerEl.querySelectorAll('form');
+		console.log(forms);
+		forms.forEach((form) => {
+			form.addEventListener('submit',function(evt) {
+				evt.preventDefault();
+				let frm = evt.target;
+				let action_url = frm.action;
+				fetch(action_url, {
+				  method: 'POST',
+				  redirect: 'follow',
+				  body: new FormData(frm)
+				})
+				.then(checkStatus)
+				.then(function(response) {
+					if (response.redirected) {
+						window.location.href = response.url;
+					}
+				}).catch(function(err) {
+					populateModalContent('modal-1', "<p>There was an error processing this request.</p>");
+					console.info(err + " url: " + url);
+				});					
+			});		
+		});
+	}	
+
+	let $addButtonEl = document.getElementById('add-button');
+	$addButtonEl.addEventListener('click', function(evt) {
+		evt.preventDefault();
+		// populate modal with form
+		fetch("{% url 'game_create' %}", {
+		  method: 'GET',
+		  headers: {
+		  	'X-Requested-With': 'XMLHttpRequest',
+			'Content-Type': 'application/json'
+		  },		
+		})
+		  .then(checkStatus)
+		  .then(parseJSON)
+		  .then(function(data) {
+			let $modalContentEl = populateModalContent('modal-1', data['html_form']);
+			addFormListeners($modalContentEl);
+		  }).catch(function(error) {
+		  	populateModalContent('modal-1', "<p>There was an error processing this request.</p>");
+			console.log('request failed', error);
+		  });
+		
+		// show modal
+		MicroModal.show('modal-1');
+	});
+});
+</script>
+{% endblock %}

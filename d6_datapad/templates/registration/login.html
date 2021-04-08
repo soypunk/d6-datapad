@@ -8,8 +8,9 @@
       <h2 class="mt0">Login</h2>
       <form method="post" class="lh-copy measure">
         {% csrf_token %}
-        {{ form.as_p }}
-       <button type="submit">Login</button>
+        {% include 'partials/form-non-field-errors.html' %}
+        {% include 'partials/form.html' %}
+       <button class="button-reset dib pv2 ph3 ba br3 b--moon-gray bg-light-gray hover-bg-moon-gray pointer" type="submit">Login</button>
       </form>
     </div>
   </section>

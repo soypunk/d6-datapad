@@ -1,0 +1,6 @@
+      <form method="POST" class="lh-copy measure" action="{% url 'game_create' %}">
+        {% csrf_token %}
+        {% include 'partials/form-non-field-errors.html' %}
+        {% include 'partials/form.html' %}
+       <button class="button-reset dib pv2 ph3 ba br3 b--moon-gray bg-light-gray hover-bg-moon-gray pointer" type="submit">Create Game</button>
+      </form>

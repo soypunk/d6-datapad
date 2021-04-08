@@ -1,0 +1,25 @@
+{% load forms widget_tweaks %}
+{% for hidden in form.hidden_fields %}
+	{{ hidden }}
+{% endfor %}
+
+{% for field in form.visible_fields %}
+	<div class="db mb3">
+		<label class="db" for="{{ field.id_for_label }}">
+			<span class="db mb1 lh-copy mid-gray b">{{ field.label }}</span>
+			{% if field|is_checkbox %}
+			{{ field }}
+			{% else %}
+			{{ field|add_class:'input-reset w-100 dib ba b--light-gray pa2 lh-solid' }}
+			{% endif %}
+		</label>
+		{% if field.help_text %}
+		<small class="db mb3 f6 lh-copy gray">
+		  {{ field.help_text|safe }}
+		</small>
+		{% endif %}		
+		{% for error in field.errors %}
+		<span class="db mb3 lh-copy dark-red">{{ error }}</span>
+		{% endfor %}
+	</div>
+{% endfor %}
